@@ -9,6 +9,6 @@ def index(request):
     return render(request, 'products/index.html')
 
 def products(request):
-    ''' Функция - контроллер на отображение шаблона index.html '''
+    ''' Функция - контроллер на отображение шаблона products.html '''
 
     return render(request, 'products/products.html')
