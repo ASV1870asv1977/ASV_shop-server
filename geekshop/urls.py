@@ -18,9 +18,11 @@ from django.urls import path
 
 from products.views import index
 from products.views import products
+from products.views import test_context  # lesson_2 code ------------------------------------
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('products/', products, name='products'),
+    path('test_context/', test_context, name='test_context'),  # lesson_2 code --------------
 ]
