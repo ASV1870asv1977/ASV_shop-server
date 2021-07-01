@@ -29,10 +29,8 @@ def json_read_product():
     return products_list
 
 
-
-
-# ============ lesson_2 code ========================
-''''''
+# ============ lesson_2 code ===========================================================
+'''
 def test_context(request):
     context = {
         'title': 'GeekShop',
@@ -49,6 +47,6 @@ def test_context(request):
         ]
     }
     return render(request, 'products/test-context.html', context)
-
-
+'''
+# =======================================================================================
 
