@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+import json
 # Create your views here.
 # функции = контроллеры = въюхи
 
@@ -56,6 +56,14 @@ def products(request):
         ],
     }
     return render(request, 'products/products.html', context)
+
+
+def json_read_product():
+    with open('products.json', 'r') as f:
+        products_list = json.load(f)
+    return products_list
+
+
 
 
 # ============ lesson_2 code ========================
