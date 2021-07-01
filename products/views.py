@@ -16,50 +16,15 @@ def products(request):
     ''' Функция - контроллер на отображение шаблона products.html '''
     context = {
         'title': 'GeekShop - Продукты',
-        'products': [
-            {  # 1
-                'img_product': '/vendor/img/products/Adidas-hoodie.png',
-                'name': 'Худи черного цвета с монограммами adidas Originals',
-                'price': '6 090',
-                'description': 'Мягкая ткань для свитшотов. Стиль и комфорт – это образ жизни.'
-            },
-            {  # 2
-                'img_product': '/vendor/img/products/Blue-jacket-The-North-Face.png',
-                'name': 'Синяя куртка The North Face',
-                'price': '23 725',
-                'description': 'Гладкая ткань. Водонепроницаемое покрытие. Легкий и теплый пуховый наполнитель.'
-            },
-            {  # 3
-                'img_product': '/vendor/img/products/Brown-sports-oversized-top-ASOS-DESIGN.png',
-                'name': 'Коричневый спортивный oversized-топ ASOS DESIGN',
-                'price': '3 390',
-                'description': 'Материал с плюшевой текстурой. Удобный и мягкий.'
-            },
-            {  # 4
-                'img_product': '/vendor/img/products/Black-Nike-Heritage-backpack.png',
-                'name': 'Черный рюкзак Nike Heritage',
-                'price': '2 340',
-                'description': 'Плотная ткань. Легкий материал.'
-            },
-            {  # 5
-                'img_product': '/vendor/img/products/Black-Dr-Martens-shoes.png',
-                'name': 'Черные туфли на платформе с 3 парами люверсов Dr Martens 1461 Bex',
-                'price': '13 590',
-                'description': 'Гладкий кожаный верх. Натуральный материал.'
-            },
-            {  # 6
-                'img_product': '/vendor/img/products/Dark-blue-wide-leg-ASOs-DESIGN-trousers.png',
-                'name': 'Темно-синие широкие строгие брюки ASOS DESIGN',
-                'price': '2 890',
-                'description': 'Легкая эластичная ткань сирсакер Фактурная ткань.'
-            },
-        ],
+        'products': json_read_product(),
     }
     return render(request, 'products/products.html', context)
 
 
 def json_read_product():
-    with open('products.json', 'r') as f:
+    ''' Функция чтения данных по продуктам из файла products.json'''
+
+    with open('products/fixtures/products.json', 'r', encoding='UTF-8') as f:
         products_list = json.load(f)
     return products_list
 
