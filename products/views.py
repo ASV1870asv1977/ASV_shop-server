@@ -15,7 +15,7 @@ def index(request):
 def products(request):
     ''' Функция - контроллер на отображение шаблона products.html '''
     context = {
-        'title': 'GeekShop - Продукты',
+        'title': 'GeekShop - Каталог',
         'products': json_read_product(),
     }
     return render(request, 'products/products.html', context)
