@@ -48,5 +48,9 @@ def registration(request):
         'title': 'GeekShop - Регистрация',
         'form': form,
     }
-
     return render(request, 'users/registration.html', context)
+
+
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect(reverse('index'))
