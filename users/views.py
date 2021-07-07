@@ -4,7 +4,7 @@ from django.urls import reverse
 
 # Create your views here.
 
-from users.forms import UserLoginForm
+from users.forms import UserLoginForm, UserRegistrationForm
 
 
 def login(request):
@@ -34,4 +34,19 @@ def login(request):
 def registration(request):
     ''' Функция - контроллер на отображение шаблона registration.html '''
 
-    return render(request, 'users/registration.html')
+    if request.method == 'POST':
+        form = UserRegistrationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('users:login'))
+        else:
+            print(form.errors)  # Вывод ошибки в Django-консоль
+    else:
+        form = UserRegistrationForm()
+
+    context = {
+        'title': 'GeekShop - Регистрация',
+        'form': form,
+    }
+
+    return render(request, 'users/registration.html', context)
