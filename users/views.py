@@ -4,7 +4,7 @@ from django.urls import reverse
 
 # Create your views here.
 
-from users.forms import UserLoginForm, UserRegistrationForm
+from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 
 
 def login(request):
@@ -51,9 +51,10 @@ def registration(request):
 def profile(request):
     ''' Функция - контроллер на отображение шаблона profile.html '''
 
+    form = UserProfileForm(instance=request.user)
     context = {
         'title': 'GeekShop - Личный кабинет',
-        # 'form': form,
+        'form': form,
     }
     return render(request, 'users/profile.html', context)
 
