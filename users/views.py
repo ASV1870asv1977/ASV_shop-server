@@ -51,7 +51,13 @@ def registration(request):
 def profile(request):
     ''' Функция - контроллер на отображение шаблона profile.html '''
 
-    form = UserProfileForm(instance=request.user)
+    if request.method == 'POST':
+        form = UserProfileForm(instance=request.user, files=request.FILES, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('users:profile'))
+    else:
+        form = UserProfileForm(instance=request.user)
     context = {
         'title': 'GeekShop - Личный кабинет',
         'form': form,
