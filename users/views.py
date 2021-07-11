@@ -48,6 +48,16 @@ def registration(request):
     return render(request, 'users/registration.html', context)
 
 
+def profile(request):
+    ''' Функция - контроллер на отображение шаблона profile.html '''
+
+    context = {
+        'title': 'GeekShop - Личный кабинет',
+        # 'form': form,
+    }
+    return render(request, 'users/profile.html', context)
+
+
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
