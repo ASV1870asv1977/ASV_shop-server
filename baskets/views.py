@@ -1,10 +1,12 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect
 
 from products.models import Product
 from baskets.models import Basket
 
 
 def basket_add(request, product_id):
+    '''Функция-контроллер на добавление товара в корзину'''
+
     product = Product.objects.get(id=product_id)
     baskets = Basket.objects.filter(user=request.user, product=product)
     # print(Basket.objects.all())
@@ -17,3 +19,11 @@ def basket_add(request, product_id):
         basket.quantity += 1
         basket.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def basket_remove(request, id):
+    '''Функция-контроллер на удаление товара из корзины'''
+
+    basket = Basket.objects.get(id=id)
+    basket.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
