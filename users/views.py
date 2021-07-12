@@ -5,6 +5,7 @@ from django.urls import reverse
 # Create your views here.
 
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from baskets.models import Basket
 
 
 def login(request):
@@ -44,6 +45,7 @@ def registration(request):
     context = {
         'title': 'GeekShop - Регистрация',
         'form': form,
+        'baskets': Basket.objects.all(),
     }
     return render(request, 'users/registration.html', context)
 
