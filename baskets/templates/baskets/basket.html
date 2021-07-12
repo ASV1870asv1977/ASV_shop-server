@@ -5,7 +5,7 @@
     {% for basket in baskets %}
         <div class="card mb-3">
             <div class="card-body">
-                <h5 class="card-title">{{ basket.user }} <br> {{ basket.product.name }} </h5> <!-- Выводит продукты всех users, добавлено чтобы не потеряться -->
+                <h5 class="card-title">{{ basket.product.name }}</h5>
                 <p class="card-text">{{ basket.product.description }}</p>
             </div>
             <ul class="list-group list-group-flush">
