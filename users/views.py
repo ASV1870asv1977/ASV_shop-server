@@ -1,10 +1,11 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.urls import reverse
 
 # Create your views here.
 
-from users.forms import UserLoginForm, UserRegistrationForm
+from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from baskets.models import Basket
 
 
 def login(request):
@@ -19,8 +20,6 @@ def login(request):
             if user and user.is_active:
                 auth.login(request, user)
                 return HttpResponseRedirect(reverse('index'))
-        else:
-            print(form.errors)  # Вывод ошибки в Django-консоль
     else:
         form = UserLoginForm()
 
@@ -38,9 +37,8 @@ def registration(request):
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Вы успешно зарегистрировались!')
             return HttpResponseRedirect(reverse('users:login'))
-        else:
-            print(form.errors)  # Вывод ошибки в Django-консоль
     else:
         form = UserRegistrationForm()
 
@@ -51,6 +49,28 @@ def registration(request):
     return render(request, 'users/registration.html', context)
 
 
+def profile(request):
+    ''' Функция - контроллер на отображение шаблона profile.html '''
+
+    user = request.user
+    if request.method == 'POST':
+        form = UserProfileForm(instance=user, files=request.FILES, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('users:profile'))
+    else:
+        form = UserProfileForm(instance=user)
+    context = {
+        'title': 'GeekShop - Личный кабинет',
+        'form': form,
+        'baskets': Basket.objects.filter(user=user),
+    }
+    return render(request, 'users/profile.html', context)
+
+
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+
+
