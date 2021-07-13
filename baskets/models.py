@@ -19,16 +19,10 @@ class Basket(models.Model):
 
     def total_quantity(self):
         '''Метод вычисления общего количества товаров в корзине'''
-        basket_user = Basket.objects.filter(user=self.user)
-        count = 0
-        for unit in basket_user:
-            count += unit.quantity
-        return count
+        baskets = Basket.objects.filter(user=self.user)
+        return sum(basket.quantity for basket in baskets)
 
     def total_sum(self):
         '''Метод вычисления общей стоимости всех товаров в корзине'''
-        basket_user = Basket.objects.filter(user=self.user)
-        sum = 0
-        for unit in basket_user:
-            sum += unit.sum()
-        return sum
+        baskets = Basket.objects.filter(user=self.user)
+        return sum(basket.sum() for basket in baskets)
