@@ -19,7 +19,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from products.views import index
-from products.views import products
 
 
 urlpatterns = [
@@ -28,6 +27,7 @@ urlpatterns = [
     path('products/', include('products.urls', namespace='products')),
     path('users/', include('users.urls', namespace='users')),
     path('baskets/', include('baskets.urls', namespace='baskets')),
+    path('admin-staff/', include('admins.urls', namespace='admins')),
 ]
 
 if settings.DEBUG:
