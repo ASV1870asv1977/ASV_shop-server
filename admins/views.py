@@ -18,7 +18,6 @@ def admin_users(request):
 
 def admin_users_create(request):
 
-
     if request.method == 'POST':
         form = UserAdminRegistrationForm(data=request.POST, files=request.FILES)
         if form.is_valid():
@@ -34,5 +33,9 @@ def admin_users_create(request):
     return render(request, 'admins/admin-users-create.html', context)
 
 
-def admin_users_update_delete(request):
+def admin_users_update(request, pk):
     return render(request, 'admins/admin-users-update-delete.html')
+
+
+def admin_users_remove(request, pk):
+    pass
