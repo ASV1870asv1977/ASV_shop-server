@@ -19,6 +19,11 @@ class UserListView(ListView):
     model = User  #  Указываем используемую модель
     template_name = 'admins/admin-users-read.html'  # Шаблон в котором отображать объекты
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(UserListView, self).get_context_data(object_list=None, **kwargs)
+        context['title'] = 'Админ-панель - Пользователи'
+        return context
+
 #@user_passes_test(lambda u: u.is_staff)
 #def admin_users(request):
 #    context = {'title': 'Админ-панель - Пользователи', 'users': User.objects.all()}
